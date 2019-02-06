@@ -1,0 +1,31 @@
+.tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, .75);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10;
+  animation: fadeIn .2s;
+}
+
+.tooltipTop {
+  transform: translate(-50%, calc(-100% - 5px));
+}
+
+.tooltipRight {
+  transform: translate(5px, -25%);
+}
+
+.tooltipBottom {
+  transform: translate(-50%, 5px);
+}
+
+.tooltipLeft {
+  transform: translate(calc(-100% - 5px), -25%);
+}
+
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}

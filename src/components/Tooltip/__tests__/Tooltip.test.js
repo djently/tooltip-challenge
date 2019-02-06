@@ -7,6 +7,7 @@ import {
 } from 'react-testing-library'
 import 'jest-dom/extend-expect'
 import Tooltip, { TOOLTIP_TESTID } from '../Tooltip'
+import tooltipStyles from '../Tooltip.module.css'
 
 afterEach(cleanup)
 
@@ -84,5 +85,66 @@ describe('Tooltip component', () => {
 
     fireEvent.mouseLeave(children)
     expect(mouseLeaveHandler).toHaveBeenCalledTimes(1)
+  })
+
+  it('should render content', () => {
+    const mockTextContent = 'Dat tooltip'
+    const triggerTestId = 'triggerTestId'
+    const { rerender, getByText, getByTestId } = render(
+      <Tooltip content={mockTextContent}>
+        <span data-testid={triggerTestId}>Test</span>
+      </Tooltip>,
+    )
+
+    // Text component
+    fireEvent.mouseOver(getByTestId(triggerTestId))
+    expect(queryByTestId(document.body, TOOLTIP_TESTID)).toContainElement(
+      getByText(mockTextContent),
+    )
+
+    // Component content
+    const contentTestId = 'contentTestId'
+    rerender(
+      <Tooltip content={<div data-testid={contentTestId} />}>
+        <span data-testid={triggerTestId}>trigger</span>
+      </Tooltip>,
+    )
+    expect(queryByTestId(document.body, TOOLTIP_TESTID)).toContainElement(
+      getByTestId(contentTestId),
+    )
+
+    // Content render function
+    rerender(
+      <Tooltip content={() => <div data-testid={contentTestId} />}>
+        <span data-testid={triggerTestId}>Test</span>
+      </Tooltip>,
+    )
+    expect(queryByTestId(document.body, TOOLTIP_TESTID)).toContainElement(
+      getByTestId(contentTestId),
+    )
+  })
+
+  it('should have class according the position', () => {
+    const triggerTestId = 'triggerTestId'
+    const { getByTestId, rerender } = render(
+      <Tooltip position="top">
+        <span data-testid={triggerTestId}>trigger</span>
+      </Tooltip>,
+    )
+    fireEvent.mouseOver(getByTestId(triggerTestId))
+    const cases = [
+      ['top', tooltipStyles.tooltipTop],
+      ['right', tooltipStyles.tooltipRight],
+      ['bottom', tooltipStyles.tooltipBottom],
+      ['left', tooltipStyles.tooltipLeft],
+    ]
+    cases.forEach(([position, className]) => {
+      rerender(
+        <Tooltip position={position}>
+          <span data-testid={triggerTestId}>trigger</span>
+        </Tooltip>,
+      )
+      expect(queryByTestId(document.body, TOOLTIP_TESTID)).toHaveClass(className)
+    })
   })
 })
