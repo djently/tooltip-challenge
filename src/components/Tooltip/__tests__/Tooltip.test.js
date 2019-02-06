@@ -7,7 +7,7 @@ import {
 } from 'react-testing-library'
 import 'jest-dom/extend-expect'
 import Tooltip from '../Tooltip'
-import { TOOLTIP_TESTID } from "../constants";
+import { TOOLTIP_TESTID, HIGHLIGHT_DEFAULT } from '../constants'
 import tooltipStyles from '../Tooltip.module.css'
 
 afterEach(cleanup)
@@ -145,7 +145,30 @@ describe('Tooltip component', () => {
           <span data-testid={triggerTestId}>trigger</span>
         </Tooltip>,
       )
-      expect(queryByTestId(document.body, TOOLTIP_TESTID)).toHaveClass(className)
+      expect(queryByTestId(document.body, TOOLTIP_TESTID)).toHaveClass(
+        className,
+      )
     })
+  })
+
+  it('should highlight text child with textHighlight prop', () => {
+    const triggerText = 'triggerText'
+    const mockHighlight = 'rgb(204, 204, 204)'
+    const { getByText, rerender } = render(
+      <Tooltip textHighlight={true}>{triggerText}</Tooltip>,
+    )
+
+    expect(getByText(triggerText).style.backgroundColor).toBe(HIGHLIGHT_DEFAULT)
+
+    rerender(<Tooltip textHighlight={mockHighlight}>{triggerText}</Tooltip>)
+    expect(getByText(triggerText).style.backgroundColor).toBe(mockHighlight)
+  })
+
+  it('should underline text child with textUnderline prop', () => {
+    const triggerText = 'triggerText'
+    const { getByText } = render(
+      <Tooltip textUnderline>{triggerText}</Tooltip>,
+    )
+    expect(getByText(triggerText).style.textDecoration).toBe('underline')
   })
 })

@@ -1,9 +1,9 @@
 import React, { cloneElement, Component } from 'react'
 import PropTypes from 'prop-types'
 import { createPortal, findDOMNode } from 'react-dom'
-import classNames from "classnames";
+import classNames from 'classnames'
 
-import { TOOLTIP_TESTID } from "./constants";
+import { TOOLTIP_TESTID, HIGHLIGHT_DEFAULT } from './constants'
 import styles from './Tooltip.module.css'
 import makeTooltipStyles from './utils/makeTooltipStyles'
 
@@ -16,6 +16,8 @@ export default class Tooltip extends Component {
       PropTypes.element,
     ]),
     position: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    textHighlight: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    textUnderline: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -32,11 +34,9 @@ export default class Tooltip extends Component {
     const { children } = this.props
 
     let child =
-      typeof children === 'string' ? (
-        <span>{children}</span>
-      ) : (
-        React.Children.only(children)
-      )
+      typeof children === 'string'
+        ? this.renderTextChild()
+        : React.Children.only(children)
 
     const eventHandlersProps = {
       onMouseOver: this.makeHandleMouseOver(child.props),
@@ -46,6 +46,17 @@ export default class Tooltip extends Component {
 
     const childClone = cloneElement(child, eventHandlersProps)
     return [childClone, this.renderTooltip(childClone)]
+  }
+
+  renderTextChild() {
+    const { children, textHighlight, textUnderline } = this.props
+    let textChildStyles = {}
+    if (textHighlight) {
+      textChildStyles.backgroundColor =
+        typeof textHighlight === 'string' ? textHighlight : HIGHLIGHT_DEFAULT
+    }
+    textChildStyles.textDecoration = textUnderline && 'underline'
+    return <span style={textChildStyles}>{children}</span>
   }
 
   makeHandleMouseOver = ({ onMouseOver }) => event => {
@@ -73,7 +84,9 @@ export default class Tooltip extends Component {
     const { content, position } = this.props
     const { node } = this.state
 
-    if (!node) { return null };
+    if (!node) {
+      return null
+    }
 
     const boundingRect = node.getBoundingClientRect()
     const tooltipStyles = makeTooltipStyles(position, boundingRect)
