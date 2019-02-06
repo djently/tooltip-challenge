@@ -1,14 +1,14 @@
-export default function makeTooltipStyles(position, { x, y, width, height }) {
+export default function makeTooltipStyles(position, { left, top, width, height }) {
   switch (position) {
     case 'top':
-      return { top: y, left: x + width / 2 }
+      return { top: top + window.scrollY, left: left + width / 2 + window.scrollX }
     case 'bottom':
-      return { top: y + height, left: x + width / 2 }
+      return { top: top + height + window.scrollY, left: left + width / 2 + window.scrollX }
     case 'left':
-      return { top: y, left: x }
+      return { top: top + window.scrollY, left: left + window.scrollX }
     case 'right':
-      return { top: y, left: x + width }
+      return { top: top + window.scrollY, left: left + width + window.scrollX }
     default:
-      return { top: y, left: x + width / 2 }
+      return { top: top + window.scrollY, left: left + width / 2 + window.scrollX }
   }
 }
