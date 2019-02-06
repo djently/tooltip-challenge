@@ -6,7 +6,8 @@ import {
   cleanup,
 } from 'react-testing-library'
 import 'jest-dom/extend-expect'
-import Tooltip, { TOOLTIP_TESTID } from '../Tooltip'
+import Tooltip from '../Tooltip'
+import { TOOLTIP_TESTID } from "../constants";
 import tooltipStyles from '../Tooltip.module.css'
 
 afterEach(cleanup)

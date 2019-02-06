@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import { createPortal, findDOMNode } from 'react-dom'
 import classNames from "classnames";
 
+import { TOOLTIP_TESTID } from "./constants";
 import styles from './Tooltip.module.css'
-import makeTooltipStyles from './makeTooltipStyles'
-
-export const TOOLTIP_TESTID = 'TOOLTIP_TESTID'
+import makeTooltipStyles from './utils/makeTooltipStyles'
 
 export default class Tooltip extends Component {
   static propTypes = {
@@ -25,15 +24,7 @@ export default class Tooltip extends Component {
   state = { isVisible: false, node: null }
 
   componentDidMount() {
-    const node = findDOMNode(this)
-    this.setState({ node })
-    node.addEventListener('resize', this.handleResize)
-  }
-
-  handleResize = () => console.log('resize')
-
-  componentWillUnmount() {
-    this.state.node.removeEventListener('resize', this.handleResize)
+    this.setState({ node: findDOMNode(this) })
   }
 
   render() {

@@ -1,0 +1,1 @@
+export const TOOLTIP_TESTID = 'TOOLTIP_TESTID'
