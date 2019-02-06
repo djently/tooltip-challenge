@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import articleStyles from './article.module.css'
 import codeSnippetImage from './code_snippet.png'
 import Tooltip from './components/Tooltip/Tooltip'
+import reactLogo from "./react.svg";
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
             content={
               <React.Fragment>
                 <b>J</b>ava<b>S</b>cript <b>X</b>ML
+                <img src={reactLogo} alt="react logo" />
               </React.Fragment>
             }
             textHighlight
