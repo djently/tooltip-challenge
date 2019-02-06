@@ -4,7 +4,7 @@ import { createPortal, findDOMNode } from 'react-dom'
 import classNames from 'classnames'
 
 import { TOOLTIP_TESTID, HIGHLIGHT_DEFAULT } from './constants'
-import styles from './Tooltip.module.css'
+import styles from './Tooltip.module.scss'
 import makeTooltipStyles from './utils/makeTooltipStyles'
 
 export default class Tooltip extends Component {

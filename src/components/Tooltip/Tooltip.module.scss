@@ -1,0 +1,73 @@
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@mixin boxArrow($position) {
+	$arrowSize: 4px;
+	$borderColor: rgba(0, 0, 0, .8);
+  &:after {
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: transparent;
+		border-width: $arrowSize;
+		@if $position == right {
+			left: 100%;
+			top: 50%;
+			border-left-color: $borderColor;
+			margin-top: -$arrowSize;
+		}
+		@if $position == left {
+			right: 100%;
+			top: 50%;
+			border-right-color: $borderColor;
+			margin-top: -$arrowSize;
+		}
+		@if $position == top {
+			bottom: 100%;
+			left: 50%;
+			border-bottom-color: $borderColor;
+			margin-left: -$arrowSize;
+		}
+		@if $position == bottom {
+			top: 100%;
+			left: 50%;
+			border-top-color: $borderColor;
+			margin-left: -$arrowSize;
+		}
+	}
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, .8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10;
+  animation: fadeIn .2s;
+}
+
+.tooltipTop {
+  transform: translate(-50%, calc(-100% - 5px));
+	@include boxArrow(bottom);
+}
+
+.tooltipRight {
+  transform: translate(5px, -25%);
+	@include boxArrow(left);
+}
+
+.tooltipBottom {
+  transform: translate(-50%, 5px);
+	@include boxArrow(top);
+}
+
+.tooltipLeft {
+  transform: translate(calc(-100% - 5px), -25%);
+	@include boxArrow(right);
+}
