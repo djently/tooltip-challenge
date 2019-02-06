@@ -13,6 +13,7 @@ export default class Tooltip extends Component {
       PropTypes.string,
       PropTypes.func,
       PropTypes.node,
+      PropTypes.element,
     ]),
     position: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   }
