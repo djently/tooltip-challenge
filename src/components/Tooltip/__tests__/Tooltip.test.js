@@ -59,7 +59,7 @@ describe('Tooltip component', () => {
 
   it('should render tooltip to the body onMouseOver and hide it onMouseLeave', () => {
     const mockText = 'mockText'
-    const { getByText } = render(<Tooltip>{mockText}</Tooltip>)
+    const { getByText } = render(<Tooltip content="tooltip">{mockText}</Tooltip>)
     const children = getByText(mockText)
 
     fireEvent.mouseOver(children)
@@ -125,10 +125,20 @@ describe('Tooltip component', () => {
     )
   })
 
+  it('should render tooltip only if content provided', () => {
+    const { getByText, rerender } = render(
+      <Tooltip position="top">
+        <span>trigger</span>
+      </Tooltip>,
+    )
+    fireEvent.mouseOver(getByText('trigger'))
+    expect(queryByTestId(document.body, TOOLTIP_TESTID)).not.toBeInTheDocument()
+  })
+
   it('should have class according the position', () => {
     const triggerTestId = 'triggerTestId'
     const { getByTestId, rerender } = render(
-      <Tooltip position="top">
+      <Tooltip position="top" content="tooltip">
         <span data-testid={triggerTestId}>trigger</span>
       </Tooltip>,
     )
@@ -141,7 +151,7 @@ describe('Tooltip component', () => {
     ]
     cases.forEach(([position, className]) => {
       rerender(
-        <Tooltip position={position}>
+        <Tooltip position={position} content="tooltip">
           <span data-testid={triggerTestId}>trigger</span>
         </Tooltip>,
       )

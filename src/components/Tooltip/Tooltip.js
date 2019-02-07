@@ -59,20 +59,6 @@ export default class Tooltip extends Component {
     return <span style={textChildStyles}>{children}</span>
   }
 
-  makeHandleMouseOver = ({ onMouseOver }) => event => {
-    if (typeof onMouseOver === 'function') {
-      onMouseOver(event)
-    }
-    this.setState({ isVisible: true })
-  }
-
-  makeHandleMouseLeave = ({ onMouseLeave }) => event => {
-    if (typeof onMouseLeave === 'function') {
-      onMouseLeave(event)
-    }
-    this.setState({ isVisible: false })
-  }
-
   renderTooltip(triggerNode) {
     const { isVisible, node } = this.state
     return node && isVisible
@@ -84,7 +70,7 @@ export default class Tooltip extends Component {
     const { content, position } = this.props
     const { node } = this.state
 
-    if (!node) {
+    if (!node || !content) {
       return null
     }
 
@@ -105,5 +91,19 @@ export default class Tooltip extends Component {
         {typeof content === 'function' ? content() : content}
       </div>
     )
+  }
+
+  makeHandleMouseOver = ({ onMouseOver }) => event => {
+    if (typeof onMouseOver === 'function') {
+      onMouseOver(event)
+    }
+    this.setState({ isVisible: true })
+  }
+
+  makeHandleMouseLeave = ({ onMouseLeave }) => event => {
+    if (typeof onMouseLeave === 'function') {
+      onMouseLeave(event)
+    }
+    this.setState({ isVisible: false })
   }
 }
