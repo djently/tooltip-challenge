@@ -12,19 +12,19 @@ self.__precacheManifest = [
     "url": "/tooltip-challenge/static/js/runtime~main.0fabd95f.js"
   },
   {
-    "revision": "7157b3647bf8978157c8",
-    "url": "/tooltip-challenge/static/js/main.7157b364.chunk.js"
+    "revision": "d542275fd0720a4cfe0b",
+    "url": "/tooltip-challenge/static/js/main.d542275f.chunk.js"
   },
   {
-    "revision": "4f79e53e58c1f063602d",
-    "url": "/tooltip-challenge/static/js/1.4f79e53e.chunk.js"
+    "revision": "43433f83f481826d2f23",
+    "url": "/tooltip-challenge/static/js/1.43433f83.chunk.js"
   },
   {
-    "revision": "7157b3647bf8978157c8",
-    "url": "/tooltip-challenge/static/css/main.ad90796e.chunk.css"
+    "revision": "d542275fd0720a4cfe0b",
+    "url": "/tooltip-challenge/static/css/main.8f40d579.chunk.css"
   },
   {
-    "revision": "99b47bbc6b4da34177e0e82dfc232391",
+    "revision": "bf715f5e3e987304c4df3eb1c128ee2a",
     "url": "/tooltip-challenge/index.html"
   }
 ];
