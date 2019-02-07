@@ -11,7 +11,12 @@ class App extends Component {
     return (
       <React.Fragment>
         <article className={articleStyles.article}>
-          <header>Introducing JSX</header>
+          <header>
+            <Tooltip content="React Logo" position="bottom">
+              <img className={articleStyles.headerLogo} src={reactLogo} alt="react logo"/>
+            </Tooltip>
+            Introducing JSX
+          </header>
 
           <header className={articleStyles.subheader}>
             Consider this variable declaration:
