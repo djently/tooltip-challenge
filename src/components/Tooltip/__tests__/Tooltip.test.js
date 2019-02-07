@@ -126,7 +126,7 @@ describe('Tooltip component', () => {
   })
 
   it('should render tooltip only if content provided', () => {
-    const { getByText, rerender } = render(
+    const { getByText } = render(
       <Tooltip position="top">
         <span>trigger</span>
       </Tooltip>,
@@ -180,5 +180,12 @@ describe('Tooltip component', () => {
       <Tooltip textUnderline>{triggerText}</Tooltip>,
     )
     expect(getByText(triggerText).style.textDecoration).toBe('underline')
+  })
+
+  it('should enable light theme for light prop', () => {
+    const triggerText = 'triggerText'
+    const { getByText } = render(<Tooltip content="Tooltip content" light>{triggerText}</Tooltip>)
+    fireEvent.mouseOver(getByText(triggerText))
+    expect(queryByTestId(document.body, TOOLTIP_TESTID)).toHaveClass(tooltipStyles.tooltipLight)
   })
 })

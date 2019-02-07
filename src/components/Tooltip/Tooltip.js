@@ -18,6 +18,7 @@ export default class Tooltip extends Component {
     position: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     textHighlight: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     textUnderline: PropTypes.bool,
+    light: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -67,7 +68,7 @@ export default class Tooltip extends Component {
   }
 
   renderTooltipContent() {
-    const { content, position } = this.props
+    const { content, position, light } = this.props
     const { node } = this.state
 
     if (!node || !content) {
@@ -81,6 +82,7 @@ export default class Tooltip extends Component {
       <div
         data-testid={TOOLTIP_TESTID}
         className={classNames(styles.tooltip, {
+          [styles.tooltipLight]: light,
           [styles.tooltipTop]: position === 'top',
           [styles.tooltipRight]: position === 'right',
           [styles.tooltipBottom]: position === 'bottom',

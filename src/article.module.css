@@ -1,4 +1,4 @@
-.article {
+.article, .footer {
   margin: 0 auto;
   max-width: 1032px;
   min-width: 768px;
@@ -6,7 +6,8 @@
 
 .article header,
 .article header.subheader,
-.article p {
+.article p,
+.footer {
   padding: 16px 32px;
   margin: 0;
 }
@@ -17,10 +18,23 @@
   padding-top: 24px;
   font-weight: bold;
 }
+
 .article header.subheader {
   font-size: 1.35em;
   font-weight: normal;
   padding-top: 16px;
+}
+
+.articleDark {
+  background: #333;
+  border-radius: 15px;
+  color: #fafafa;
+}
+.articleDark a {
+  color: #fafafa;
+}
+.articleDark a:visited {
+  color: #999;
 }
 
 .imageContainer {
