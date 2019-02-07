@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/tooltip-challenge/static/css/main.e109ed3f.chunk.css"
   },
   {
-    "revision": "79ef1d09a85d17570b8b0d851a7481be",
+    "revision": "9e0dae25d35b5c6d624c385ffcdb332e",
     "url": "/tooltip-challenge/index.html"
   }
 ];

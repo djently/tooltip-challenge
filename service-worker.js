@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/tooltip-challenge/precache-manifest.f99ba644b69998e361903641042d920a.js"
+  "/tooltip-challenge/precache-manifest.89cc3cddcd533976b70e967a861edd19.js"
 );
 
 workbox.clientsClaim();
